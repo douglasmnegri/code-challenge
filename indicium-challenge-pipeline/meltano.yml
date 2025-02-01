@@ -11,9 +11,13 @@ environments:
               files:
                 - entity: order_details
                   path: ../data/order_details.csv
-                  keys: 
-                  - order_id
-                  delimiter: ","
+                  keys:
+                    - order_id
+                  delimiter: ','
+        loaders:
+          - name: target-csv
+            config:
+              destination_path: output
   - name: staging
   - name: prod
 plugins:
@@ -21,3 +25,7 @@ plugins:
     - name: tap-csv
       variant: meltanolabs
       pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+  loaders:
+    - name: target-csv
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/target-csv.git
