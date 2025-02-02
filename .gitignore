@@ -1,0 +1,5 @@
+# Ignore docker volumes/data
+
+/dbdata/
+**/pgdata_loader/
+/**/pgdata_processed/

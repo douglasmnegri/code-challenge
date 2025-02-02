@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   db:
@@ -12,3 +12,18 @@ services:
       - ./data/northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
     ports:
       - 5432:5432
+
+  db-processed:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: processed_data
+      POSTGRES_USER: north_user
+      POSTGRES_PASSWORD: wind
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_loader:/var/lib/postgresql/data
+
+volumes:
+  pgdata_processed:
+  pgdata_loader:
