@@ -13,7 +13,15 @@ environments:
                   path: ../data/order_details.csv
                   keys:
                     - order_id
-                  delimiter: ','
+                  delimiter: ","
+          - name: tap-postgres
+            config:
+              database: northwind
+              host: localhost
+              port: 5432
+              user: northwind_user
+              filter_schemas:
+                - public
         loaders:
           - name: target-csv
             config:
@@ -25,6 +33,9 @@ plugins:
     - name: tap-csv
       variant: meltanolabs
       pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+    - name: tap-postgres
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
   loaders:
     - name: target-csv
       variant: meltanolabs
