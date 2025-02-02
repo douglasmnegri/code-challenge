@@ -2,41 +2,54 @@ version: 1
 default_environment: dev
 project_id: d2f29757-6d85-4560-b59e-472f1e8c2c29
 environments:
-  - name: dev
-    config:
-      plugins:
-        extractors:
-          - name: tap-csv
-            config:
-              files:
-                - entity: order_details
-                  path: ../data/order_details.csv
-                  keys:
-                    - order_id
-                  delimiter: ","
-          - name: tap-postgres
-            config:
-              database: northwind
-              host: localhost
-              port: 5432
-              user: northwind_user
-              filter_schemas:
-                - public
-        loaders:
-          - name: target-csv
-            config:
-              destination_path: output
-  - name: staging
-  - name: prod
+- name: dev
+  config:
+    plugins:
+      extractors:
+      - name: tap-csv
+        config:
+          files:
+          - entity: order_details
+            path: ../data/order_details.csv
+            keys:
+            - order_id
+            delimiter: ','
+      - name: tap-postgres
+        config:
+          database: northwind
+          host: localhost
+          port: 5432
+          user: northwind_user
+          filter_schemas:
+          - public
+      loaders:
+      - name: target-csv
+        config:
+          destination_path: output/
+      - name: target-postgres
+        config:
+          database: processed_data
+          host: localhost
+          port: 5433
+          user: north_user
+          table_prefix: ''
+          table_suffix: ''
+          default_target_schema: public
+          table_name: orders
+- name: staging
+- name: prod
 plugins:
   extractors:
-    - name: tap-csv
-      variant: meltanolabs
-      pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
-    - name: tap-postgres
-      variant: meltanolabs
-      pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-postgres.git
   loaders:
-    - name: target-csv
-      variant: meltanolabs
-      pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+  - name: target-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres
