@@ -3,3 +3,4 @@
 /dbdata/
 **/pgdata_loader/
 /**/pgdata_processed/
+indicium-challenge-pipeline/utils/__init__.py
