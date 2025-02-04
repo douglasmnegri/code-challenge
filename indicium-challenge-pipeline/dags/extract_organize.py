@@ -10,18 +10,21 @@ load_dotenv()
 utils_path = os.getenv("UTILS_PATH")
 project_path = os.getenv("PROJECT_PATH")
 
-print("Project's Path: ", project_path) # Check if correct project path was passed to the .env file (Absolute path is recommended)
-print("Utils's Path: ", project_path) # Check if correct utils path was passed to the .env file
+# Check if correct project path was passed to the .env file (Absolute path is recommended)
+print("Project's Path: ", project_path)
+# Check if correct utils path was passed to the .env file
+print("Utils's Path: ", project_path)
 
 sys.path.insert(0, utils_path)
 from directories import organize_csv_files
 
 dag = DAG(
     dag_id="meltano_csv_pipeline",
-    start_date=datetime(2024, 12, 1),
-    schedule_interval="@daily",
+    start_date=datetime(2024, 12, 1, 0, 0),  
+    schedule_interval="0 0 * * *", 
     catchup=False,
 )
+
 
 meltano_command_csv = f"""
 cd {project_path} &&

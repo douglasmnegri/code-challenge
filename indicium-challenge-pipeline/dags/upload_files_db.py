@@ -36,8 +36,8 @@ with DAG(
     'meltano_pipeline_dag',
     default_args={'owner': 'airflow'},
     description='Extracts data from the correct folder and uploads to the processed_data db',
-    schedule_interval=None,
-    start_date=datetime(2025, 2, 3),
+    schedule_interval="10 0 * * *",
+    start_date=datetime(2024, 12, 1, 0, 0),
     catchup=False,
 ) as dag:
 
