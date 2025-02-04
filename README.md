@@ -93,4 +93,11 @@ In the Airflow UI, trigger both DAGs:
 
 ## Aiflow running a DAG
 
-![Airflow running the extraction DAG](./gif/airflow.gif.gif)
+![Airflow running the extraction DAG](gif/airflow.gif)
+
+
+## Improvements
+To enhance the development of this project, consider the following improvements:
+
+- Use Docker containers not only for the databases but also for Meltano and Airflow.
+- Initialize the project using these containers and Bash commands.

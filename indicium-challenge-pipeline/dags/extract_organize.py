@@ -12,6 +12,7 @@ project_path = os.getenv("PROJECT_PATH")
 
 # Check if correct project path was passed to the .env file (Absolute path is recommended)
 print("Project's Path: ", project_path)
+
 # Check if correct utils path was passed to the .env file
 print("Utils's Path: ", project_path)
 
