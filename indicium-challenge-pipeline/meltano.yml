@@ -49,8 +49,8 @@ plugins:
     pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
     config:
       files:
-      - entity: orders
-        path: output/postgres/orders/2025-02-03/public-orders.csv
+      - entity: order_details
+        path: ../data/order_details.csv
         keys:
         - order_id
         delimiter: ','
