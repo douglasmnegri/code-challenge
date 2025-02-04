@@ -18,7 +18,7 @@ from directories import organize_csv_files
 
 dag = DAG(
     dag_id="meltano_csv_pipeline",
-    start_date=datetime(2023, 10, 1),
+    start_date=datetime(2024, 12, 1),
     schedule_interval="@daily",
     catchup=False,
 )
@@ -44,7 +44,7 @@ extract_csv = BashOperator(
 organize_csv_task = PythonOperator(
     task_id="organize_csv_files",
     python_callable=organize_csv_files,
-    op_args=["output/csv"],
+    op_args=["output/csv", "{{ dag_run.conf.get('date', ds) }}"],
     dag=dag,
 )
 
@@ -58,7 +58,7 @@ extract_postgres = BashOperator(
 organize_postgres_task = PythonOperator(
     task_id="organize_postgres_files",
     python_callable=organize_csv_files,
-    op_args=["output/postgres"],
+    op_args=["output/postgres", "{{ dag_run.conf.get('date', ds) }}"],
     dag=dag,
 )
 

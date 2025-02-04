@@ -3,15 +3,8 @@ import shutil
 from datetime import date
 
 # Get current date and create the correct folder structure
-
-
-def get_current_date():
-    return date.today().strftime("%Y-%m-%d")
-
-
-def organize_csv_files(destination_dir):
+def organize_csv_files(destination_dir, current_date):
     source_dir = "output"
-    current_date = get_current_date()
 
     files = [i for i in os.listdir(source_dir) if i.endswith(".csv")]
 
