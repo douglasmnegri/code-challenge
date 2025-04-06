@@ -13,6 +13,13 @@ plugins:
   - name: tap-postgres
     variant: meltanolabs
     pip_url: meltanolabs-tap-postgres
+  loaders:
+  - name: target-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres
   utilities:
   - name: airflow
     variant: apache
