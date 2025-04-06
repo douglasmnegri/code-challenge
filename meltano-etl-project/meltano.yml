@@ -6,6 +6,13 @@ environments:
 - name: staging
 - name: prod
 plugins:
+  extractors:
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-tap-postgres
   utilities:
   - name: airflow
     variant: apache
