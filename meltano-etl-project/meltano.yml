@@ -22,6 +22,14 @@ plugins:
     - name: tap-postgres
       variant: meltanolabs
       pip_url: meltanolabs-tap-postgres
+      config:
+        user: northwind_user
+        password: thewindisblowing
+        host: localhost
+        port: 5432
+        database: northwind
+        filter_schemas:
+          - public
   loaders:
     - name: target-csv
       variant: meltanolabs
@@ -33,6 +41,10 @@ plugins:
     - name: target-postgres
       variant: meltanolabs
       pip_url: meltanolabs-target-postgres
+    - name: target-csv--pg
+      inherit_from: target-csv
+      config:
+        output_path: ../data/postgres
   utilities:
     - name: airflow
       variant: apache
