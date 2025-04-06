@@ -5,7 +5,9 @@ from airflow.utils.dates import days_ago
 from datetime import datetime
 import os
 
-PROJECT_ROOT = os.path.expanduser("~/Documents/projects/code-challenge/meltano-etl-project")
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 default_args = {
     'owner': 'airflow',
