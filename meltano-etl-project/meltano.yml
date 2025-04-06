@@ -9,7 +9,7 @@ plugins:
   extractors:
     - name: tap-csv
       variant: meltanolabs
-      pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+      pip_url: 'git+https://github.com/MeltanoLabs/tap-csv.git'
     - name: tap-csv--dir
       inherit_from: tap-csv
       config:
@@ -18,7 +18,6 @@ plugins:
             path: ../data/order_details.csv
             keys:
               - order_id
-
     - name: tap-postgres
       variant: meltanolabs
       pip_url: meltanolabs-tap-postgres
@@ -33,22 +32,29 @@ plugins:
   loaders:
     - name: target-csv
       variant: meltanolabs
-      pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+      pip_url: 'git+https://github.com/MeltanoLabs/target-csv.git'
     - name: target-csv--dir
       inherit_from: target-csv
       config:
         output_path: ../data/csv
-    - name: target-postgres
-      variant: meltanolabs
-      pip_url: meltanolabs-target-postgres
     - name: target-csv--pg
       inherit_from: target-csv
       config:
         output_path: ../data/postgres
+    - name: target-postgres
+      variant: meltanolabs
+      pip_url: meltanolabs-target-postgres
+      config:
+        user: user
+        password: password
+        host: localhost
+        port: 5433
+        database: processed_data
+        default_target_schema: public
   utilities:
     - name: airflow
       variant: apache
-      pip_url:
-        git+https://github.com/meltano/airflow-ext.git@main apache-airflow==2.8.1
-        --constraint
+      pip_url: >-
+        git+https://github.com/meltano/airflow-ext.git@main
+        apache-airflow==2.8.1 --constraint
         https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-no-providers-${MELTANO__PYTHON_VERSION}.txt
