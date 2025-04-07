@@ -48,6 +48,17 @@ meltano invoke airflow:initialize
 meltano invoke airflow users create -u admin@localhost -p password --role Admin -e admin@localhost -f admin -l admin
 ```
 
+6. Optional: Set Airflow Home Directory
+
+By default, Meltano sets `AIRFLOW_HOME` internally to `.meltano/run/airflow`. 
+You usually do **not** need to set this manually.
+
+Only set this if you're troubleshooting (You can also change the configs inside the file airflow.cfg):
+
+```bash
+export AIRFLOW_HOME=$(pwd)/airflow
+````
+
 ## Running the project
 
 1. From the root directory (code-challenge) start the docker-compose.yml file that contains both databases:
@@ -57,14 +68,14 @@ docker-compose up --build
 docker-compose up -d
 ```
 
-3. From meltano's directory start the airflow on two different terminals:
+2. From meltano's directory start the airflow on two different terminals:
 
 ```bash
 meltano invoke airflow scheduler
 meltano invoke airflow webserver --port 8080
 ```
 
-4. You can now run DAGs from your terminal using Meltano:
+3. You can now run DAGs from your terminal using Meltano:
    
 ```bash
    meltano invoke airflow dags trigger northwind_elt_structured
@@ -74,3 +85,9 @@ meltano invoke airflow webserver --port 8080
 4. You can choose to run your DAG's from Airflow UI
 
 - Open your browser and go to: 🔗 http://localhost:8080
+
+
+
+## Project Demo
+![Project Demo](./assets/airflow.gif)
+
