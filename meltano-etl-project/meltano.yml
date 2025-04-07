@@ -2,83 +2,79 @@ version: 1
 default_environment: dev
 project_id: b45a31d5-552e-4cff-bb9b-05a345a0273a
 environments:
-- name: dev
-  config:
-    plugins:
-      extractors:
-      - name: tap-csv
-        config:
-          files:
-          - entity: order_details
-            keys:
-            - order_id
-            delimiter: ','
-          - entity: orders
-            keys:
-            - order_id
-            delimiter: ','
-- name: staging
-- name: prod
+  - name: dev
+    config:
+      plugins:
+        extractors:
+          - name: tap-csv
+            config:
+              files:
+                - entity: order_details
+                  keys:
+                    - order_id
+                  delimiter: ","
+                - entity: orders
+                  keys:
+                    - order_id
+                  delimiter: ","
+  - name: staging
+  - name: prod
 plugins:
   extractors:
-  - name: tap-csv
-    variant: meltanolabs
-    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
-    config:
-      files:
-      - entity: order_details
-        keys:
-        - order_id
-        delimiter: ','
-      - entity: orders
-        keys:
-        - order_id
-        delimiter: ','
-  - name: tap-csv--dir
-    inherit_from: tap-csv
-    config:
-      files:
-      - entity: order_details
-        path: ../data/order_details.csv
-        keys:
-        - order_id
-  - name: tap-postgres
-    variant: meltanolabs
-    pip_url: meltanolabs-tap-postgres
-    config:
-      user: northwind_user
-      password: thewindisblowing
-      host: localhost
-      port: 5432
-      database: northwind
-      filter_schemas:
-      - public
+    - name: tap-csv
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+      config:
+        files:
+          - entity: order_details
+            keys:
+              - order_id
+            delimiter: ","
+    - name: tap-csv--dir
+      inherit_from: tap-csv
+      config:
+        files:
+          - entity: order_details
+            path: ../data/order_details.csv
+            keys:
+              - order_id
+    - name: tap-postgres
+      variant: meltanolabs
+      pip_url: meltanolabs-tap-postgres
+      config:
+        user: northwind_user
+        password: thewindisblowing
+        host: localhost
+        port: 5432
+        database: northwind
+        filter_schemas:
+          - public
   loaders:
-  - name: target-csv
-    variant: meltanolabs
-    pip_url: git+https://github.com/MeltanoLabs/target-csv.git
-  - name: target-csv--dir
-    inherit_from: target-csv
-    config:
-      output_path: ../data/csv
-  - name: target-csv--pg
-    inherit_from: target-csv
-    config:
-      output_path: ../data/postgres
-  - name: target-postgres
-    variant: meltanolabs
-    pip_url: meltanolabs-target-postgres
-    config:
-      user: user
-      password: password
-      host: localhost
-      port: 5433
-      database: processed_data
-      default_target_schema: public
+    - name: target-csv
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/target-csv.git
+    - name: target-csv--dir
+      inherit_from: target-csv
+      config:
+        output_path: ../data/csv
+    - name: target-csv--pg
+      inherit_from: target-csv
+      config:
+        output_path: ../data/postgres
+    - name: target-postgres
+      variant: meltanolabs
+      pip_url: meltanolabs-target-postgres
+      config:
+        user: user
+        password: password
+        host: localhost
+        port: 5433
+        database: processed_data
+        default_target_schema: public
   utilities:
-  - name: airflow
-    variant: apache
-    pip_url: >-
-      git+https://github.com/meltano/airflow-ext.git@main
-      apache-airflow==2.8.1 --constraint
-      https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-no-providers-${MELTANO__PYTHON_VERSION}.txt
+    - name: airflow
+      variant: apache
+      pip_url: >-
+        git+https://github.com/meltano/airflow-ext.git@main
+        apache-airflow==2.8.1 --constraint
+        https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-no-providers-${MELTANO__PYTHON_VERSION}.txt
