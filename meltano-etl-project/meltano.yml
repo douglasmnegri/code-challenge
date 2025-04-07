@@ -13,10 +13,6 @@ environments:
                   keys:
                     - order_id
                   delimiter: ","
-                - entity: orders
-                  keys:
-                    - order_id
-                  delimiter: ","
   - name: staging
   - name: prod
 plugins:

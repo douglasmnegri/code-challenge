@@ -91,5 +91,5 @@ meltano invoke airflow webserver --port 8080
 ## Airflow Running
 ![Airflow Running](./assets/airflow.png)
 
-## Tasks for past dates
+## Tasks running for past dates
 ![Multiple Dates](./assets/project-dates.png)
