@@ -10,14 +10,10 @@ environments:
         config:
           files:
           - entity: order_details
-            path: 
-              /Users/douglasmelo/Documents/projects/code-challenge/meltano-etl-project/../data/csv/2025-04-06/order_details.csv
             keys:
             - order_id
             delimiter: ','
           - entity: orders
-            path: 
-              /Users/douglasmelo/Documents/projects/code-challenge/meltano-etl-project/../data/postgres/orders/2025-04-06/public-orders.csv
             keys:
             - order_id
             delimiter: ','
@@ -31,14 +27,10 @@ plugins:
     config:
       files:
       - entity: order_details
-        path: 
-          /Users/douglasmelo/Documents/projects/code-challenge/meltano-etl-project/../data/csv/2024-01-02/order_details.csv
         keys:
         - order_id
         delimiter: ','
       - entity: orders
-        path: 
-          /Users/douglasmelo/Documents/projects/code-challenge/meltano-etl-project/../data/postgres/orders/2024-01-02/public-orders.csv
         keys:
         - order_id
         delimiter: ','

@@ -88,6 +88,8 @@ meltano invoke airflow webserver --port 8080
 
 
 
-## Project Demo
-![Project Demo](./assets/airflow.gif)
+## Airflow Running
+![Airflow Running](./assets/airflow.png)
 
+## Tasks for past dates
+![Multiple Dates](./assets/project-dates.png)
